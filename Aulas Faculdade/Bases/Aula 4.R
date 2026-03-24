@@ -63,3 +63,16 @@ dados[i.baixa.exec == TRUE, sum(repasse.ano, na.rm = T)]/10^9
 dados[, sum(repasse.ano, na.rm = T), by = i.baixa.exec]
 
 dados[i.baixa.exec == FALSE, sum(repasse.ano, na.rm = T)]/10^9
+
+# ------------------------------------------------------------------
+
+covariaveis <- covariaveis.2021
+
+dados_mesclados <- merge(dados, covariaveis, by = "cod.mun")
+
+View(dados_mesclados)
+
+nrow(dados_mesclados)
+ncol(dados_mesclados)
+lapply(lapply(dados_mesclados, is.na), sum)
+
