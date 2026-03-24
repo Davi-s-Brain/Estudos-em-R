@@ -76,3 +76,22 @@ nrow(dados_mesclados)
 ncol(dados_mesclados)
 lapply(lapply(dados_mesclados, is.na), sum)
 
+dados_mesclados[, pib.per.capita := pib / pop]
+
+# ---------------------------------------------------------
+
+dados_mesclados[, cor(pib.per.capita, pc.executado.ano, use = "complete.obs")]
+
+# ---------------------------------------------------------
+faixas <- c("Até 10k", "10k-25k",
+             "25k-50k", "50k-100k", "+ 100k")
+
+dados[, faixa.de.pib.per.capita := cut(dados_mesclados$pib.per.capita,
+                                       breaks = c(0, 10000, 25000, 50000, 100000, +Inf))]
+
+levels(dados$faixa.de.pib.per.capita) <- faixas
+
+dados[, table(faixa.de.pib.per.capita)]
+
+
+
